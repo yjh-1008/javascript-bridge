@@ -6,6 +6,14 @@ class App {
     OutputView.printStart();
     InputView.readBridgeSize((size) => {
       this.game = new BridgeGame(size);
+      this.move();
+    });
+  }
+
+  async move() {
+    InputView.readMoving((command) => {
+      this.game.move(command);
+      OutputView.printMap(this.game);
     });
   }
 }
