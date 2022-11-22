@@ -1,5 +1,6 @@
 const MissionUtils = require('@woowacourse/mission-utils');
 const {Console} = MissionUtils;
+const { bridgeValidation, moveValidation, restartValidation } = require('./validate.js');
 /**
  * 사용자로부터 입력을 받는 역할을 한다.
  */
@@ -7,7 +8,16 @@ const InputView = {
   /**
    * 다리의 길이를 입력받는다.
    */
-  readBridgeSize() {},
+   readBridgeSize(callback) {
+    Console.readLine('다리의 길이를 입력해주세요.\n',(answer) => {
+      try{
+        bridgeValidation(answer)
+        callback(answer);
+      }catch(err){
+        Console.print(err.message);
+      }
+    })
+},
 
   /**
    * 사용자가 이동할 칸을 입력받는다.
